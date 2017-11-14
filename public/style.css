@@ -34,3 +34,17 @@ html, body {
         transform: rotate(360deg);
     }
 }
+
+#boxInfo {
+    height: 80vh;
+}
+/* Note: Try to remove the following lines to see the effect of CSS positioning */
+.affix {
+    top: 0;
+    width: 100%;
+    z-index: 9999 !important;
+}
+
+.affix + .container-fluid {
+    padding-top: 70px;
+}

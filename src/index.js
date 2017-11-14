@@ -15,21 +15,27 @@ const {getMovies} = require('./api.js');
 getMovies().then((movies) => {
     let outputHtml = "";
 
-  // console.log('Here are all the movies:');
   movies.forEach(({title, rating, id}) => {
-      // $('#test').text(`id#${id} - ${title} - rating: ${rating}`);
-      outputHtml += `<div class="well" id="${id}">`;
-      outputHtml += `<h2>Title: ${title} </h2>`;
-      outputHtml += `<h3> Rating: ${rating} </h3>`;
-      outputHtml += `</div>`;
-      paginationOutTop += `<li><a href="${id}">${id}</a></li>`;
+
+            outputHtml += `<div  id="boxInfo" class="well">`;
+            outputHtml += `<div id="${id}">`;
+            outputHtml += `<h2>Title: ${title} </h2>`;
+            outputHtml += `<h3> Rating: ${rating} </h3>`;
+            outputHtml += `</div>`;
+            outputHtml += `</div>`;
+
+            paginationOutTop += `<li><a href="#${id}">${id}</a></li>`;
 
   });
 
-    $('#movies').removeClass("loader").html(outputHtml).append(paginationOutTop + paginationOutBottom);
+    $('#pageNav').append(paginationOutTop + paginationOutBottom);
+    $('#movies').removeClass("loader").html(outputHtml);
 }).catch((error) => {
   alert('Oh no! Something went wrong.\nCheck the console for details.');
   console.log(error);
 
+
+
 });
+
 
