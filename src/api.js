@@ -1,24 +1,28 @@
 const $ = require("jquery");
-const blogPost = {title: 'Ajax Requests', body: 'Are a frustrating way to use JS!', id: 3};
-const url = 'api/movies/3';
-const options = {
-    method: 'PUT',
+// const blogPost = {title: 'Ajax Requests', body: 'Are a frustrating way to use JS!', id: 3};
+const url = 'api/movies';
+let options = {
+    method: '',
     headers: {
         'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(blogPost),
+    }
 };
+
 
 module.exports = {
     getMovies: () => {
-        $("#movies").addClass("loader");
+        $("#movies").html("").addClass("loader");
+        console.log("hi");
         return fetch('/api/movies')
             .then(response => response.json());
     },
-    addMovies: (input) => {
-        fetch(url, options)
-            .then(() => console.log('done'))
-            .catch(error => console.log('error'))
+    addMovies: (movieTittle, raTings) => {
+        options.body = JSON.stringify({title: movieTittle, rating: raTings });
+        options.method = "POST";
+        console.log(options);
+        return fetch(url, options)
+            .then(response => console.log(response.json()))
+            .catch(error => console.log(error))
     },
     delMovies: (input) => {
         fetch(url, options)

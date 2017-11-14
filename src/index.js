@@ -1,3 +1,5 @@
+{
+    "use strict";
 
     /**
      * es6 modules and imports
@@ -12,36 +14,55 @@
      *
      * require style imports
      */
+
     const {getMovies, delMovies, addMovies, editMovies} = require('./api.js');
-    getMovies().then((movies) => {
-        let outputHtml = "";
 
-        movies.forEach(({title, rating, id}) => {
-
-            outputHtml += `<div  id="boxInfo" class="well">`;
-            outputHtml += `<div id="${id}">`;
-            outputHtml += `<h2>Title: ${title} </h2>`;
-            outputHtml += `<h3> Rating: ${rating} </h3>`;
-            outputHtml += `</div>`;
-            outputHtml += `</div>`;
-
-            paginationOutTop += `<li><a href="#${id}">${id}</a></li>`;
-
-        });
-
-        $('#pageNav').append(paginationOutTop + paginationOutBottom);
-        $('#movies').removeClass("loader").html(outputHtml);
-    }).catch((error) => {
-        alert('Oh no! Something went wrong.\nCheck the console for details.');
-        console.log(error);
-
-
+    getMovies().then((movies) => buildDisplay(movies))
+        .catch((error) => {
+                alert('Oh no! Something went wrong.\nCheck the console for details.');
+                console.log(error);
     });
-// addMovies();
+
+    buildDisplay = (movies) => {
+            console.log(movies);
+            let outputHtml = "";
+            movies.forEach(({title, rating, id}) => {
+
+                outputHtml += `<div  id="boxInfo" class="well">`;
+                outputHtml += `<div id="${id}">`;
+                outputHtml += `<h2>Title: ${title} </h2>`;
+                outputHtml += `<h3> Rating: ${rating} </h3>`;
+                outputHtml += `</div>`;
+                outputHtml += `</div>`;
+
+                paginationOutTop += `<li><a href="#${id}">${id}</a></li>`;
+
+            });
+
+            $('#pageNav').append(paginationOutTop + paginationOutBottom);
+            $('#movies').removeClass("loader").html(outputHtml);
+        };
+
+
+    // addMovies();
 // delMovies();
 // editMovies();
 
-    $('#add-btn').click(function (e) {
+    $('#add-btn').click ((e) => {
         e.preventDefault();
          $('#add-modal').modal('show');
     });
+
+
+    $('#model-add').click((e) => {
+        e.preventDefault();
+        let movieTitle = $('#movie-title').val();
+        let raTings = $('#rating').val();
+
+        addMovies(movieTitle, raTings)
+            .then(() => {
+            getMovies().then((movies) => buildDisplay(movies);
+            })
+
+});
+}
