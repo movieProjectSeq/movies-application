@@ -1,20 +1,8 @@
 {
     "use strict";
 
-    /**
-     * es6 modules and imports
-     */
-    // const $ = require('jquery');
-    // const bs = require('bootstrap');
     let paginationOutTop = "";
     const paginationOutBottom = `<li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li></ul></nav>`;
-    /**
-     *
-     *
-     *
-     * require style imports
-     */
-
     const {getMovies, delMovies, addMovies, editMovies} = require('./api.js');
 
     getMovies().then((movies) => buildDisplay(movies))
@@ -29,11 +17,10 @@
 
             movies.forEach(({title, rating, id}) => {
 
-                outputHtml += `<div  id="boxInfo" class="well">`;
-                outputHtml += `<div id="${id}" class="movie-div">`;
+                outputHtml += `<div id="movie-${id}" class="well movie-div">`;
                 outputHtml += `<h2>Title: ${title} </h2>`;
-                outputHtml += `<h3> Rating: ${rating} </h3>`;
-                outputHtml += `</div>`;
+                outputHtml += `<h3> Rating: ${rating} </h3><br>`;
+                outputHtml += `<div style="text-align: right" id="buttons-${id}" class="btn-group"><button type="button" class="btn btn-primary">Edit</button><button type="button" class="btn btn-danger">Delete</button></div>`;
                 outputHtml += `</div>`;
 
                 paginationOutTop += `<li><a href="#${id}">${id}</a></li>`;
@@ -42,6 +29,10 @@
 
             $('#pageNav').html(paginationOutTop + paginationOutBottom);
             $('#movies').removeClass("loader").html(outputHtml);
+            $('.movie-div').click((e) => {
+                $('#').show();
+                console.log(e.currentTarget.id);
+             });
         };
 
 
@@ -66,8 +57,5 @@
             })
     });
 
-    $('.movie-div').click((e) => {
-        e.preventDefault();
-        console.log(this);
-    });
+
 }
