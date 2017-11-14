@@ -9,36 +9,6 @@
       "title": "Star Wars: A New Hope",
       "rating": "5",
       "id": 2
-    },
-    {
-      "title": "Ajax Requests",
-      "body": "Are a frustrating way to use JS!",
-      "id": 3
-    },
-    {
-      "title": "hello",
-      "rating": "4",
-      "id": 4
-    },
-    {
-      "title": "SAN AN",
-      "rating": "4",
-      "id": 5
-    },
-    {
-      "title": "j",
-      "rating": "1",
-      "id": 6
-    },
-    {
-      "title": "g",
-      "rating": "1",
-      "id": 7
-    },
-    {
-      "title": "y",
-      "rating": "1",
-      "id": 8
     }
   ]
 }

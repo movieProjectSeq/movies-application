@@ -29,18 +29,13 @@ module.exports = {
             .then(() => console.log('done'))
             .catch(error => console.log('error'))
     },
-    editMovies: (input) => {
-        // const =
-        const options = {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(blogPost),
-        };
-        fetch(url, options)
-            .then()
-            .catch(error => console.log('error'))
-    }
+    editMovies: (movieTittle, raTings, id) => {
+            options.body = JSON.stringify({title: movieTittle, rating: raTings});
+            options.method = "PUT";
+            console.log(options);
+            return fetch(`/api/movies/${id}`, options)
+                .then(response => console.log(response.json()))
+                .catch(error => console.log(error))
+        }
 };
 

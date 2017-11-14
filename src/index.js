@@ -6,7 +6,7 @@
      */
     // const $ = require('jquery');
     // const bs = require('bootstrap');
-    let paginationOutTop = `<nav aria-label="Page navigation"><ul class="pagination"><li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>`;
+    let paginationOutTop = "";
     const paginationOutBottom = `<li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li></ul></nav>`;
     /**
      *
@@ -23,13 +23,14 @@
                 console.log(error);
     });
 
-    buildDisplay = (movies) => {
-            console.log(movies);
+    const buildDisplay = (movies) => {
             let outputHtml = "";
+            paginationOutTop = `<nav aria-label="Page navigation"><ul class="pagination"><li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>`;
+
             movies.forEach(({title, rating, id}) => {
 
                 outputHtml += `<div  id="boxInfo" class="well">`;
-                outputHtml += `<div id="${id}">`;
+                outputHtml += `<div id="${id}" class="movie-div">`;
                 outputHtml += `<h2>Title: ${title} </h2>`;
                 outputHtml += `<h3> Rating: ${rating} </h3>`;
                 outputHtml += `</div>`;
@@ -39,7 +40,7 @@
 
             });
 
-            $('#pageNav').append(paginationOutTop + paginationOutBottom);
+            $('#pageNav').html(paginationOutTop + paginationOutBottom);
             $('#movies').removeClass("loader").html(outputHtml);
         };
 
@@ -61,8 +62,12 @@
 
         addMovies(movieTitle, raTings)
             .then(() => {
-            getMovies().then((movies) => buildDisplay(movies);
+            getMovies().then((movies) => buildDisplay(movies));
             })
+    });
 
-});
+    $('.movie-div').click((e) => {
+        e.preventDefault();
+        console.log(this);
+    });
 }
