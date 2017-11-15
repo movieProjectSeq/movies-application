@@ -17,7 +17,7 @@ module.exports = {
             .then(response => response.json());
     },
     addMovies: (movieTittle, raTings) => {
-        options.body = JSON.stringify({title: movieTittle, rating: raTings });
+        options.body = JSON.stringify({title: movieTittle, rating: raTings});
         options.method = "POST";
         console.log(options);
         return fetch(url, options)
@@ -30,12 +30,12 @@ module.exports = {
             .catch(error => console.log('error'))
     },
     editMovies: (movieTittle, raTings, id) => {
-            options.body = JSON.stringify({title: movieTittle, rating: raTings});
-            options.method = "PUT";
-            console.log(options);
-            return fetch(`/api/movies/${id}`, options)
-                .then(response => console.log(response.json()))
-                .catch(error => console.log(error))
-        }
+        options.body = JSON.stringify({title: movieTittle, rating: raTings});
+        options.method = "PUT";
+        console.log(options);
+        return fetch(`/api/movies/${id}`, options)
+            .then(response => console.log(response.json()))
+            .catch(error => console.log(error))
+    }
 };
 
