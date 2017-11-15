@@ -1,9 +1,10 @@
 {
     "use strict";
 
-    let paginationOutTop = "";
+    // let paginationOutTop = "";
     let currentID = 0;
-    const paginationOutBottom = `<li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li></ul></nav>`;
+    let currentMovies = [];
+    // const paginationOutBottom = `<li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li></ul></nav>`;
     const {getMovies, delMovies, addMovies, editMovies} = require('./api.js');
 
     getMovies().then((movies) => buildDisplay(movies))
@@ -14,8 +15,11 @@
 
     const editModal = (event) => {
         currentID = event.currentTarget.id.split('-');
-        let oldTitle = event.target.parentElement.innerHTML.split(' ');
-         $('#edit-movie-title').html(`<label for="edit-movie-title" class="control-label">Movie Title:</label>\n <input type="text" placeholder="${oldTitle[1]}" id="edit-movie-title-box" class="form-control">`);
+        currentMovies.forEach(movie =>{
+            if (movie.id == currentID[2]){
+                $('#edit-movie-title').html(`<label for="edit-movie-title" class="control-label">Movie Title:</label>\n <input type="text" value="${movie.title}" id="edit-movie-title-box" class="form-control">`);
+            }
+        });
         $('#edit-modal').modal('show');
     };
 
@@ -24,7 +28,7 @@
     const buildDisplay = (movies) => {
             let outputHtml = "";
             // paginationOutTop = `<nav aria-label="Page navigation"><ul class="pagination"><li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>`;
-
+            currentMovies = movies;
             movies.forEach(({title, rating, id}) => {
 
                 outputHtml += `<div id="movie-${id}" class="well movie-div">`;

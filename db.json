@@ -6,9 +6,14 @@
       "id": 3
     },
     {
-      "title": "Test",
-      "rating": "1",
+      "title": "Spaceballs",
+      "rating": "3",
       "id": 4
+    },
+    {
+      "title": "Coco",
+      "rating": "5",
+      "id": 5
     }
   ]
 }
