@@ -2,7 +2,7 @@
   "movies": [
     {
       "title": "Casablanca",
-      "rating": "4",
+      "rating": "1",
       "id": 3
     },
     {
@@ -22,7 +22,7 @@
     },
     {
       "title": "Finding Nemo",
-      "rating": "5",
+      "rating": "1",
       "id": 7
     }
   ]
