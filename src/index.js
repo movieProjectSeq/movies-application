@@ -81,7 +81,6 @@
         e.preventDefault();
         let movieTitle = $('#edit-movie-title-box').val();
         let raTings = $('#edit-rating').val();
-        console.log(e);
         editMovies(movieTitle, raTings, currentID[2]).then(() => getMovies().then((movies) => buildDisplay(movies)));
     });
 
