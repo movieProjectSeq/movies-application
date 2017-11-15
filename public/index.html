@@ -124,12 +124,12 @@
             <div class="modal-body">
                 <form onsubmit="return false">
                     <div class="form-group">
-                        <label for="movie-title" class="control-label">Movie Title:</label>
-                        <input type="text" class="form-control" id="movie-title">
+                        <label for="add-movie-title" class="control-label">Movie Title:</label>
+                        <input type="text" class="form-control" id="add-movie-title">
                     </div>
                     <div class="form-group">
-                        <label for="rating" class="control-label">Rating</label>
-                        <select id="rating">
+                        <label for="add-rating" class="control-label">Rating</label>
+                        <select id="add-rating">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -146,6 +146,38 @@
     </div>
 </div>
 
+
+<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Edit the movie!</h4>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="return false">
+                    <div id="edit-movie-title" class="form-group">
+                        <label for="edit-movie-title-box" class="control-label">Movie Title:</label>
+                        <input type="text" id="edit-movie-title-box" class="form-control" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-rating" class="control-label">Rating</label>
+                        <select id="edit-rating">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="model-edit" class="btn btn-default" data-dismiss="modal">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
             <!--</form>-->
 
 
