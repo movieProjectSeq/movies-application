@@ -35,10 +35,8 @@ module.exports = {
             .catch(error => console.log(error))
     },
     getInfo: (movieTittle) => {
-        options.method = "GET";
-        return fetch(`https://api.themoviedb.org/3/search/movie?api_key=6cbbfdf433fa79249fa8ce9ef79910fe&language=en-US&query=${movieTittle}&page=1&include_adult=false`, options)
+        return fetch(`https://api.themoviedb.org/3/search/movie?api_key=6cbbfdf433fa79249fa8ce9ef79910fe&language=en-US&query=${movieTittle}&page=1&include_adult=false`)
             .then(response => response.json())
             .catch(error => console.log(error))
     }
 };
-

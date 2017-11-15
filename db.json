@@ -1,19 +1,14 @@
 {
   "movies": [
     {
-      "title": "Batman",
-      "rating": "1",
-      "id": 3
-    },
-    {
       "title": "Spaceballs",
       "rating": "3",
       "id": 4
     },
     {
-      "title": "Coco",
-      "rating": "5",
-      "id": 5
+      "title": "spideman",
+      "rating": "3",
+      "id": 6
     }
   ]
 }
