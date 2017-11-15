@@ -24,10 +24,12 @@ module.exports = {
             .then(response => console.log(response.json()))
             .catch(error => console.log(error))
     },
-    delMovies: (input) => {
-        fetch(url, options)
-            .then(() => console.log('done'))
-            .catch(error => console.log('error'))
+    delMovies: (id) => {
+        options.method = "DELETE";
+        console.log(options);
+        return fetch(`/api/movies/${id}`, options)
+            .then(response => console.log(response.json()))
+            .catch(error => console.log(error))
     },
     editMovies: (movieTittle, raTings, id) => {
         options.body = JSON.stringify({title: movieTittle, rating: raTings});

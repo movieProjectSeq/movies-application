@@ -28,6 +28,8 @@
 
 
 
+
+
     const buildDisplay = (movies) => {
             let outputHtml = "";
             paginationOutTop = `<nav aria-label="Page navigation"><ul class="pagination"><li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>`;
@@ -47,9 +49,25 @@
             $('#pageNav').html(paginationOutTop + paginationOutBottom);
             $('#movies').removeClass("loader").html(outputHtml);
 
+/*click to edit*/
             $('.btn-primary').click((e) => {
                 editModal(e);
              })
+// ---------------------
+//        click to Delete
+
+        $('.btn-danger').click((e) => {
+                console.log(e)
+            let id = event.currentTarget.id.split('-');
+            delMovies(id[2]);
+            console.log($('#movie-'+id[2]).hide());
+
+        })
+// --------------------------
+
+
+
+
             // $('.movie-div').click((e) => {
             //     // $('#').show();
             //     console.log(e.currentTarget.id);

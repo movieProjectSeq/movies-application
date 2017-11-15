@@ -3,6 +3,7 @@ html, body {
 }
 
 .container {
+    padding-top: 20px;
     position: relative;
     top: 25 %;
     /*transform: translateY(-100%);*/
