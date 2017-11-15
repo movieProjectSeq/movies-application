@@ -23,8 +23,6 @@
         $('#edit-modal').modal('show');
     };
 
-
-
     const buildDisplay = (movies) => {
             let outputHtml = "";
             // paginationOutTop = `<nav aria-label="Page navigation"><ul class="pagination"><li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>`;
