@@ -1,14 +1,14 @@
 {
   "movies": [
     {
-      "title": "Star Wars: A New Hope",
-      "rating": "5",
-      "id": 2
+      "title": "Casablanca",
+      "rating": "4",
+      "id": 3
     },
     {
-      "title": "Hello",
-      "rating": "3",
-      "id": 3
+      "title": "Test",
+      "rating": "1",
+      "id": 4
     }
   ]
 }

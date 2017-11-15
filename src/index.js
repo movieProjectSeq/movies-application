@@ -2,6 +2,7 @@
     "use strict";
 
     let paginationOutTop = "";
+    let currentID = 0;
     const paginationOutBottom = `<li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li></ul></nav>`;
     const {getMovies, delMovies, addMovies, editMovies} = require('./api.js');
 
@@ -12,27 +13,17 @@
     });
 
     const editModal = (event) => {
-        let id = event.currentTarget.id.split('-');
+        currentID = event.currentTarget.id.split('-');
         let oldTitle = event.target.parentElement.innerHTML.split(' ');
-        console.log(oldTitle);
          $('#edit-movie-title').html(`<label for="edit-movie-title" class="control-label">Movie Title:</label>\n <input type="text" placeholder="${oldTitle[1]}" id="edit-movie-title-box" class="form-control">`);
-        $('#model-edit').click((e) => {
-            e.preventDefault();
-            let movieTitle = $('#edit-movie-title-box').val();
-            console.log(movieTitle);
-            let raTings = $('#edit-rating').val();
-            editMovies(movieTitle, raTings, id[2]).then(() => getMovies().then((movies) => buildDisplay(movies)));
-        });
         $('#edit-modal').modal('show');
     };
 
 
 
-
-
     const buildDisplay = (movies) => {
             let outputHtml = "";
-            paginationOutTop = `<nav aria-label="Page navigation"><ul class="pagination"><li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>`;
+            // paginationOutTop = `<nav aria-label="Page navigation"><ul class="pagination"><li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>`;
 
             movies.forEach(({title, rating, id}) => {
 
@@ -42,42 +33,32 @@
                 outputHtml += `<button id="edit-btn-${id}" type="button" class="btn btn-primary">Edit</button><button id="del-btn-${id}" type="button" class="btn btn-danger">Delete</button>`;
                 outputHtml += `</div>`;
 
-                paginationOutTop += `<li><a href="#${id}">${id}</a></li>`;
+                // paginationOutTop += `<li><a href="#${id}">${id}</a></li>`;
 
             });
 
-            $('#pageNav').html(paginationOutTop + paginationOutBottom);
+
+            // $('#pageNav').html(paginationOutTop + paginationOutBottom);
             $('#movies').removeClass("loader").html(outputHtml);
 
-/*click to edit*/
-            $('.btn-primary').click((e) => {
-                editModal(e);
-             })
+
+
+                /*click to edit*/
+                $('.btn-primary').click((e) => {
+                    editModal(e);
+                });
 // ---------------------
 //        click to Delete
 
-        $('.btn-danger').click((e) => {
-                console.log(e)
-            let id = event.currentTarget.id.split('-');
-            delMovies(id[2]);
-            console.log($('#movie-'+id[2]).hide());
+                $('.btn-danger').click((e) => {
+                    let id = event.currentTarget.id.split('-');
+                    delMovies(id[2]);
+                    $('#movie-' + id[2]).hide();
+                });
 
-        })
+        };
 // --------------------------
 
-
-
-
-            // $('.movie-div').click((e) => {
-            //     // $('#').show();
-            //     console.log(e.currentTarget.id);
-            //  });
-        };
-
-
-    // addMovies();
-// delMovies();
-// editMovies();
 
     $('#add-btn').click ((e) => {
         e.preventDefault();
@@ -94,6 +75,14 @@
             .then(() => {
             getMovies().then((movies) => buildDisplay(movies));
             })
+    });
+
+    $('#model-edit').click((e) => {
+        e.preventDefault();
+        let movieTitle = $('#edit-movie-title-box').val();
+        let raTings = $('#edit-rating').val();
+        console.log(e);
+        editMovies(movieTitle, raTings, currentID[2]).then(() => getMovies().then((movies) => buildDisplay(movies)));
     });
 
 }
