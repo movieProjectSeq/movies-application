@@ -5,7 +5,7 @@
     let currentID = 0;
     let currentMovies = [];
     // const paginationOutBottom = `<li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li></ul></nav>`;
-    const {getMovies, delMovies, addMovies, editMovies} = require('./api.js');
+    const {getMovies, delMovies, addMovies, editMovies, getInfo} = require('./api.js');
 
     getMovies().then((movies) => buildDisplay(movies))
         .catch((error) => {
@@ -30,22 +30,22 @@
             // paginationOutTop = `<nav aria-label="Page navigation"><ul class="pagination"><li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>`;
             currentMovies = movies;
             movies.forEach(({title, rating, id}) => {
+                getInfo(title).then((results) => {
+                    fetch(`https://image.tmdb.org/t/p/w300${results.results[0].poster_path}`).then(response => {
+                    outputHtml = "";
+                    console.log(response.url);
+                    outputHtml += `<div id="movie-${id}" class="well movie-div">`;
+                    outputHtml += `<img src="${response.url}"/>`;
+                    outputHtml += `<h2>Title: ${title}  </h2>`;
+                    outputHtml += `<h3> Rating: ${rating} </h3><br>`;
+                    outputHtml += `<button id="edit-btn-${id}" type="button" class="btn btn-primary">Edit</button><button id="del-btn-${id}" type="button" class="btn btn-danger">Delete</button>`;
+                    outputHtml += `</div>`;
+                    // paginationOutTop += `<li><a href="#${id}">${id}</a></li>`;
+                    $('#movies').removeClass("loader").append(outputHtml);})
+                });
 
-                outputHtml += `<div id="movie-${id}" class="well movie-div">`;
-                outputHtml += `<h2>Title: ${title}  </h2>`;
-                outputHtml += `<h3> Rating: ${rating} </h3><br>`;
-                outputHtml += `<button id="edit-btn-${id}" type="button" class="btn btn-primary">Edit</button><button id="del-btn-${id}" type="button" class="btn btn-danger">Delete</button>`;
-                outputHtml += `</div>`;
-
-                // paginationOutTop += `<li><a href="#${id}">${id}</a></li>`;
-
-            });
-
-
-            // $('#pageNav').html(paginationOutTop + paginationOutBottom);
-            $('#movies').removeClass("loader").html(outputHtml);
-
-
+                // $('#pageNav').html(paginationOutTop + paginationOutBottom);
+                // $('#movies').removeClass("loader").html(outputHtml);
 
                 /*click to edit*/
                 $('.btn-primary').click((e) => {
@@ -59,6 +59,11 @@
                     delMovies(id[2]);
                     $('#movie-' + id[2]).hide();
                 });
+
+
+            });
+
+
 
         };
 // --------------------------
